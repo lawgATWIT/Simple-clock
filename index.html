@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Clock</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 100px;
+    }
+    #time {
+        font-size: 5em;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .timezone-buttons {
+        margin-bottom: 20px;
+    }
+    .timezone-buttons button {
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 1.5em;
+    }
+</style>
+</head>
+<body>
+<div id="time"></div>
+<div class="timezone-buttons">
+    <button onclick="setTimeZone('America/New_York')">Eastern Time (ET)</button>
+    <button onclick="setTimeZone('America/Chicago')">Central Time (CT)</button>
+    <button onclick="setTimeZone('America/Denver')">Mountain Time (MT)</button>
+    <button onclick="setTimeZone('America/Los_Angeles')">Pacific Time (PT)</button>
+    <button onclick="setTimeZone('America/Anchorage')">Alaska Time (AKT)</button>
+    <button onclick="setTimeZone('Pacific/Honolulu')">Hawaii Time (HT)</button>
+</div>
+
+<script>
+var timeZone = 'America/New_York';
+
+function updateTime() {
+    var now = new Date();
+    var options = { 
+        timeZone: timeZone, 
+        hour12: true,
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    };
+    var timeString = now.toLocaleTimeString('en-US', options);
+    
+    var timeDisplay = document.getElementById('time');
+    timeDisplay.textContent = timeString;
+}
+
+function setTimeZone(zone) {
+    timeZone = zone;
+    updateTime();
+}
+
+
+setInterval(updateTime, 1000); 
+updateTime(); 
+</script>
+</body>
+</html>
